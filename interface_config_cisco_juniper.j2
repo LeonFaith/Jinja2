@@ -1,0 +1,11 @@
+{% if device_type == 'cisco' %}
+interface {{ interface_name }}
+  ip address {{ ip_address }} {{ netmask }}
+  no shutdown
+  description {{ description }}
+{% elif device_type == 'juniper' %}
+set interfaces {{ interface_name }} unit 0 family inet address {{ ip_address }}/{{ netmask }}
+set interfaces {{ interface_name }} description "{{ description }}"
+{% else %}
+# Unknown device type
+{% endif %}

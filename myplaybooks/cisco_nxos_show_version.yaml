@@ -1,0 +1,21 @@
+---
+- name: cisco nxos show version
+  hosts: nxos
+  gather_facts: no
+  tasks:
+    - name: execute show version
+      nxos_command:
+        commands:
+          - terminal length 0
+          - show version
+      register: show_text
+
+- name: copy file in play 2
+  hosts: nxos
+  gather_facts: no
+  tasks:
+    - name: Copy output to a file
+      delegate_to: localhost
+      copy:
+        content: "{{ show_text.stdout[1] }}"
+        dest: "/home/lwang/{{ inventory_hostname }}_{{ lookup('pipe', 'date +%Y%m%d') }}_show_version.log"

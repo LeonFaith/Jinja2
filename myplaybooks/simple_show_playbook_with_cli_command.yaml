@@ -1,0 +1,13 @@
+---
+- name: execute cisco show command
+  hosts: cisco
+  gather_facts: no 
+  tasks: 
+    - name: execute show command
+      cli_command:
+        command: show version
+      register: show_text
+    - name: display show txt in msg
+      debug: 
+        msg: "this is a debug message: {{ show_text }}"
+

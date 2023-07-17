@@ -1,0 +1,22 @@
+---
+- name: Configure Cisco devices
+  hosts: cisco
+  gather_facts: no
+  vars:
+    device_type: cisco
+  tasks:
+    - name: Generate configuration
+      template:
+        src: interface_config_cisco_juniper.j2
+        dest: "/path/to/generated/{{ inventory_hostname }}.config"
+        
+- name: Configure Juniper devices
+  hosts: juniper
+  gather_facts: no
+  vars:
+    device_type: juniper
+  tasks:
+    - name: Generate configuration
+      template:
+        src: interface_config_cisco_juniper.j2
+        dest: "/path/to/generated/{{ inventory_hostname }}.config"

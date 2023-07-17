@@ -1,0 +1,15 @@
+---
+- name: execute cisco nxos show command #play name 
+  hosts: cisco                          # filter network device, for certain group_name
+  gather_facts: no                      # collect device 
+  # tasks for execute series of tasks, every each of task is like dict, which can be turned into list.
+  tasks:
+    # one dict is for one task, consist of name, module, parameters, 
+    - name: execute show command
+      ansible.netcommon.cli_command:
+        command: show version
+      register: show_text 
+    # it will register the result into show_text
+    - name: Display show text in msg
+      debug: 
+        msg: "this is a debug message: {{ show_text.stdout }}"

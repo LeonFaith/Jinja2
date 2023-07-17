@@ -1,0 +1,8 @@
+from jinja2 import Template
+
+template = Template("I am a {{ name }}.")
+result = template.render(name="Network Engineer who want to learn more about python network automation")
+
+print(type(result), result)
+
+
